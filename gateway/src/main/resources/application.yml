@@ -1,0 +1,28 @@
+server:
+  port: 8356
+
+
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+      - id: dfgdfusers
+        uri: lb://users
+        predicates:
+          - Path= /users/**
+        filters:
+          - Auth
+
+
+auth:
+  jwt:
+    pubKeyPath: F:\\keys\\rsa.pub # 公钥地址
+    secret: sf3423jsdf#3$@FDS32
+    expire: 180 # 过期时间,单位分钟
+    cookieName: AUTH_TOKEN
